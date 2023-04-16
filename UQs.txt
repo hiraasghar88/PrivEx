@@ -1,0 +1,7 @@
+Energy efficiency service provider has a catalog of products (including energy efficient insulation, windows, appliances) and requests following data in order to provide useful statistics and personalized recommendations:
+UQ1
+I need to get the smart meter's number, the associated customer's number and the number of persons at home.
+UQ2
+I need to get, for people owning their home and having a yearly income greater than 75,000 Euros, their customer's number and their yearly income.
+UQ3
+I need to get the sum of power consumption for each smart meter's number computed every hour over the measurements of the previous 3 hours.

@@ -1,0 +1,4 @@
+PREFIX issda: <http://example.org/>
+
+SELECT ?MeterId ?yearlyIncome
+WHERE {?MeterId  issda:associatedOccupier ?Occupier . ?Occupier  issda:yearlyIncome ?yearlyIncome}
