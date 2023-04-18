@@ -1,0 +1,363 @@
+# baseURI : http://example.org/issda
+
+@prefix issda: <http://example.org/issda#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes and their subclasses
+
+# Class MeterId and its subclasses 
+
+issda:MeterId
+  rdf:type owl:Class .
+
+issda:ResidentialMeter
+  rdfs:subClassOf issda:MeterId .
+
+issda:SmeMeter
+  rdfs:subClassOf issda:MeterId .
+
+# Class Building and its subclasses
+
+issda:Building
+  rdf:type owl:Class.
+
+issda:ResidentialBuilding
+  rdfs:subClassOf issda:Building .
+
+issda:ProfessionalBuilding
+  rdfs:subClassOf issda:Building .
+
+issda:Apartment 
+  rdfs:subClassOf issda:ResidentialBuilding .
+
+issda:SemiDetachedHouse
+  rdfs:subClassOf issda:ResidentialBuilding .
+
+issda:DetachedHouse
+  rdfs:subClassOf issda:ResidentialBuilding .
+
+issda:TerracedHouse
+  rdfs:subClassOf issda:ResidentialBuilding .
+
+issda:Bungalow
+  rdfs:subClassOf issda:ResidentialBuilding .
+
+# Class Occupier and its subclasses
+
+issda:Occupier
+  rdf:type owl:Class .
+
+issda:Household
+  rdfs:subClassOf issda:Occupier .
+
+issda:Organization
+  rdfs:subClassOf issda:Occupier .
+
+# Class BusinessCategory and its instances
+
+issda:BusinessCategory
+   rdf:type owl:Class .
+
+issda:agriculture
+   rdf:type issda:BusinessCategory;
+   rdfs:label "Agriculture, forestry and fishing" .
+
+issda:industry
+   rdf:type issda:BusinessCategory;
+   rdfs:label "Industry Mining and quarrying Manufacturing Electricity, gas, steam and air conditioning supply Water supply, sewerage, waste management and remediation activities" .
+
+issda:construction
+   rdf:type issda:BusinessCategory;
+   rdfs:label "Construction" .
+
+issda:tradeOrRepair
+   rdf:type issda:BusinessCategory;
+   rdfs:label "Wholesale and retail trade; repair of motor vehicles and motorcycles" .
+
+issda:businessOrService
+   rdf:type issda:BusinessCategory;
+   rdfs:label "Business and Professional Services Information and communication Financial and insurance activities Real estate activities Professional, scientific and technical activities Administrative and support service activities Public administration and defence; compulsory social security Education Human health and social work activities" .
+
+issda:transportationOrStorageOrAccomodation
+   rdf:type issda:BusinessCategory;
+   rdfs:label "Other Transportation and storage Accommodation and food service activities Leisure hotels Arts, entertainment and recreation Other service activities Activities of households as employers; undifferentiated goods- and services producing activities of households for own use Activities of extra-territorial organisations and bodies" .
+
+
+# Properties of domain Meter or its subclasses
+
+issda:consumption
+  rdf:type owl:DynamicProperty ;
+  rdfs:domain issda:MeterId ;
+  rdfs:range xsd:integer ;
+rdfs:comment "dynamic property that associates the consumption to a meter at different timestamps" .
+
+issda:timestamp rdfs:range xsd:dateTime .
+
+ issda:associatedOccupier 
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain issda:MeterId ;
+  rdfs:range issda:Occupier ;
+rdfs:comment "Expresses the relation from a meter number to an occupier" .
+
+issda:associatedBuilding 
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain issda:MeterId ;
+  rdfs:range issda:Building ;
+rdfs:comment "Expresses the relation from a meter to a building" .
+
+issda:broadbandInternet
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:MeterId ;
+  rdfs:range xsd:boolean ;
+rdfs:comment "Expresses the boolean property for a meter to have a broadband internet connection" .
+
+issda:narrowbandInternet
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:MeterId ;
+  rdfs:range xsd:boolean ;
+rdfs:comment "Expresses the boolean property for a meter to have a narrowband internet connection" .
+
+issda:broadbandInternet
+   rdfs:subPropertyOf issda:internet .
+
+issda:narrowbandInternet
+   rdfs:subPropertyOf issda:internet .
+   
+   #For meters id without internet connection, add the triples id issda:internet "false"
+   
+# Properties of domain Occupier or its subclasses
+
+issda:rent
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain issda:Occupier ;
+  rdfs:range issda:Building ;
+rdfs:comment "Expresses the renting relation between an occupier and a building" .
+
+issda:owns
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain issda:Occupier ;
+  rdfs:range issda:Building ;
+rdfs:comment "Expresses the owning relation between an occupier and a building" .
+
+issda:numberUnderFifteen
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Occupier ;
+  rdfs:range xsd:integer ; 
+  rdfs:comment "Number of persons under fifteen in the home. Maybe zero if only one person in the home" .
+
+issda:numberOverFifteen
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Occupier ;
+  rdfs:range xsd:integer ;
+  rdfs:comment "Number of persons over fifteen in the home, including the contract holder".
+
+issda:numberOfPersons
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Occupier ;  
+  rdfs:range xsd:integer ;
+  rdfs:comment "property computed by rules from the two basic properties nbUnderFifteen and nbOverFifteen".
+  
+issda:familySize
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Occupier ;  
+  rdfs:range xsd:string ;
+  rdfs:comment "Expresses the number of persons at home using the predefined string values: Small, Medium and Large".
+  
+issda:chiefIncomeEarnerEducation
+  rdf:type owl:DatatypeProperty ;  
+  rdfs:domain issda:Household ;
+  rdfs:range xsd:string;
+  rdfs:comment "Expresses the last diploma attained by chief income earner using the string values".
+
+issda:chiefIncomeEarnerEducationLevel
+  rdf:type owl:DatatypeProperty ;  
+  rdfs:domain issda:Household ;
+  rdfs:range xsd:string;
+  rdfs:comment "Expresses the level of education of the chief income earner using the predefined string values: noFormalEducation, primary, secondaryToJuniorCertLevel, secondaryToLeavingCertLevel, third" .  
+
+issda:yearlyIncome
+  rdf:type owl:DatatypeProperty ; 
+  rdfs:domain issda:Occupier ;
+  rdfs:range xsd:integer;
+rdfs:comment "Expresses the exact yearly income of occupier in Euros using the integer values".
+
+issda:yearlyIncomeRange
+  rdf:type owl:DatatypeProperty ; 
+  rdfs:domain issda:Occupier ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the yearly income in Euros using the predefined string values: Low, Average and High".
+
+issda:chiefIncomeEarnerStatus 
+  rdfs:domain issda:Household ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the employment status of the chief income earner using the predefined string values: employee, selfEmployed, unemployed, retired, carer" .
+
+issda:business
+  rdfs:domain issda:Organization ;
+  rdfs:range issda:BusinessCategory;
+rdfs:comment "Expresses the business of the organization: one of the instances of the class BusinessCategory" .
+
+issda:numberOfEmployees
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Organization;
+  rdfs:range xsd:string ;
+rdfs:comment "Expresses the number of employees in an organization using the predefined string values: soleEmpoyee, between1-5, between6-10, between11-24, between25-49, between50-99, between100-199, more200 " .
+
+issda:yearlyTurnover
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Organization ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the yearly turnover of the organization in Euros using the predefined string values: less58000, between59000-100000, between101000-250000, between251000-500000, between501000-750000, between751000-1M, between1M-1.5M, between1.6M-2M, between3M-5M, between6M-10M, between11M-20M, more20M " .
+
+# Properties of domain Building or its subclasses
+
+issda:buildingAge 
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Building ;
+  rdfs:range xsd:integer;
+rdfs:comment "Expresses the exact age of building in years using the integer values".
+
+issda:buildingAgeRange 
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Building ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the age of a building using predefined string values: New, Between new and old, and Old".
+
+issda:surfaceArea
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Building;
+  rdfs:range xsd:integer ;
+rdfs:comment "Expresses the surface of a building in square meters " .
+
+issda:numberOfBedrooms
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer ;
+rdfs:comment "Expresses the number of bedrooms of a residential building" .
+
+issda:heatingEnergySource 
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the heating of a residential building using predefined string values: electric, gas, oil, solidFuel, renewable" .
+
+issda:waterHeatingEnergySource 
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the water heating of a residential building using predefined string values: centralHeatingSystem, electric, gas, oil, solidFuel, renewable" .
+ 
+issda:cookingEnergySource rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:string;
+rdfs:comment "Expresses the cooking energy of a residential building using predefined string values: electric, gas, oil, solidFuel" .
+
+issda:heatingEnergySource 
+   rdfs:subPropertyOf issda:buildingEnergySource .
+
+issda:waterHeatingEnergySource 
+   rdfs:subPropertyOf issda:buildingEnergySource .
+
+issda:cookingEnergySource 
+   rdfs:subPropertyOf issda:buildingEnergySource .
+
+issda:numberOfWashingMachine 
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfTumbleDryer
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfDishWasher
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfElectricCooker
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfFreezer
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfTV
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfComputer
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer .
+
+issda:numberOfGameConsole
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:integer.
+
+issda:atticInsulated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ResidentialBuilding ;
+  rdfs:range xsd:boolean ;
+rdfs:comment "Expresses the boolean property for a residential building to have its attic insulated" .
+
+issda:externalWallInsulated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:Building ;
+  rdfs:range xsd:boolean ;
+rdfs:comment "Expresses the boolean property for a building to have its external walls insulated" .
+
+issda:electricCoolingAppliance
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ProfessionalBuilding ;
+  rdfs:range xsd:boolean . 
+
+issda:electricHeatingAppliance
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ProfessionalBuilding ;
+  rdfs:range xsd:boolean .
+
+issda:electricLightingAppliance
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ProfessionalBuilding ;
+  rdfs:range xsd:boolean .
+
+issda:electricOfficeEquipment
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ProfessionalBuilding ;
+  rdfs:range xsd:boolean .
+
+issda:electricManufacturingEquipment
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ProfessionalBuilding ;
+  rdfs:range xsd:boolean .
+
+issda:electricEquipment
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain issda:ProfessionalBuilding ;
+  rdfs:range xsd:boolean .
+
+issda:electricCoolingAppliance
+  rdfs:subPropertyOf issda:electricEquipment .
+
+issda:electricHeatingAppliance
+  rdfs:subPropertyOf issda:electricEquipment .
+
+issda:electricLightingAppliance
+  rdfs:subPropertyOf issda:electricEquipment .
+
+issda:electricOfficeEquipment
+  rdfs:subPropertyOf issda:electricEquipment .
+
+issda:electricManufacturingEquipment
+  rdfs:subPropertyOf issda:electricEquipment .
+
