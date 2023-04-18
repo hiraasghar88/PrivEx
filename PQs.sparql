@@ -2,3 +2,8 @@ PREFIX issda: <http://example.org/>
 
 SELECT ?MeterId ?yearlyIncome
 WHERE {?MeterId  issda:associatedOccupier ?Occupier . ?Occupier  issda:yearlyIncome ?yearlyIncome}
+
+SELECT ?timeWindowEnd SUM(?consumption)
+WHERE {(?MeterId  issda:consumption ?consumption, ?timestamp)}
+GROUP BY ?timeWindowEnd 
+TIMEWINDOW (6h, 6h)
