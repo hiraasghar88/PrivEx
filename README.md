@@ -7,7 +7,7 @@ Second, it provides a form-based interface for guiding data producers in constru
 explanation for each detected privacy risk. Last, it provides several options for modifying the utility queries to reduce the detected privacy risks. 
 
 PrivEx is implemented using python 3.9.6. To run it on your system you need to install python and download all the files included in its directory.
-Run "UI.py" file to access and use the interactive user interface.
+Run "UI.py" file to use the interactive user interface.
 
 The following files are included in the directory of PrivEx:
 - UQs.text:The textual description of utility queries that are entered in UQs.sparql file is provided in this file.
