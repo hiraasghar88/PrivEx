@@ -20,6 +20,6 @@ produce suggestions for reducing the privcay risks. The "UI.py" file uses the ou
 for the negotiation to reduce the detected privacy risks.
 - TACQ.py: Code impelmented for storing and manipulating the utility and privacy queries provided in UQs.sparql file and PQs.sparql file.
 - issda_schema.ttl: It is a simple RDFS ontology designed to provide a shared vocabulary used by service providers to express their utility queries and by data producers
-to express their privacy queries. It is used in the implementation of the user interface designed for guiding the data producers in the construction of privacy queries.
+to express their privacy queries. It is used in the implementation of the user interface designed for guiding data producers in the construction of privacy queries.
 - Img-SC.jpg: It is an image file used in the explanation of a privacy risk. 
 
