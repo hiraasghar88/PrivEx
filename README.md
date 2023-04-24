@@ -6,7 +6,7 @@ The user interface provides several types of support to data producers. First, i
 Second, it provides a form-based interface for guiding data producers in construction of privacy queries. Third, it detects the privacy risks and provides a factual 
 explanation for each detected privacy risk. Last, it provides several options for modifying the utility queries to reduce the detected privacy risks. 
 
-PrivEx is implemented using python 3.9.6. To run it on your system you need to install python and download all the files included in its directory.
+PrivEx is implemented using python 3.9.6. To run it on your system you need to install python and download all the files included in the directory.
 Run "UI.py" file to use the interactive user interface.
 
 The following files are included in the directory of PrivEx:
