@@ -96,7 +96,7 @@ rdfs:comment "dynamic property that associates the consumption to a meter at dif
 
 issda:timestamp rdfs:range xsd:dateTime .
 
- issda:associatedOccupier 
+issda:associatedOccupier 
   rdf:type owl:ObjectProperty ;
   rdfs:domain issda:MeterId ;
   rdfs:range issda:Occupier ;
@@ -126,7 +126,7 @@ issda:broadbandInternet
 issda:narrowbandInternet
    rdfs:subPropertyOf issda:internet .
    
-   #For meters id without internet connection, add the triples id issda:internet "false"
+For meters id without internet connection, add the triples id issda:internet "false"
    
 # Properties of domain Occupier or its subclasses
 
@@ -158,13 +158,13 @@ issda:numberOfPersons
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Occupier ;  
   rdfs:range xsd:integer ;
-  rdfs:comment "property computed by rules from the two basic properties nbUnderFifteen and nbOverFifteen".
+ rdfs:comment "Expresses the number of persons at home using integer value such as 1, 2, 3 and 5.
   
 issda:familySize
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Occupier ;  
   rdfs:range xsd:string ;
-  rdfs:comment "Expresses the number of persons at home using the predefined string values: Small, Medium and Large".
+  rdfs:comment "Expresses the number of persons at home using the predefined string values: Small (family of 1-3 persons), Medium (family of 3-5 persons) and Large (family of more than 6 persons)".
   
 issda:chiefIncomeEarnerEducation
   rdf:type owl:DatatypeProperty ;  
@@ -182,13 +182,13 @@ issda:yearlyIncome
   rdf:type owl:DatatypeProperty ; 
   rdfs:domain issda:Occupier ;
   rdfs:range xsd:integer;
-rdfs:comment "Expresses the exact yearly income of occupier in Euros using the integer values".
+rdfs:comment "Expresses the exact yearly income of occupier in Euros using integer values such as 5000, 25000 and 75000".
 
 issda:yearlyIncomeRange
   rdf:type owl:DatatypeProperty ; 
   rdfs:domain issda:Occupier ;
   rdfs:range xsd:string;
-rdfs:comment "Expresses the yearly income in Euros using the predefined string values: Low, Average and High".
+rdfs:comment "Expresses the yearly income in Euros using the predefined string values: Low (less than 25000), Average (between 25000-75000), High (more than 75000)".
 
 issda:chiefIncomeEarnerStatus 
   rdfs:domain issda:Household ;
@@ -204,13 +204,13 @@ issda:numberOfEmployees
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Organization;
   rdfs:range xsd:string ;
-rdfs:comment "Expresses the number of employees in an organization using the predefined string values: soleEmpoyee, between1-5, between6-10, between11-24, between25-49, between50-99, between100-199, more200 " .
+rdfs:comment "Expresses the number of employees in an organization using the predefined string values: soleEmpoyee, between 1-5, between 6-10, between 11-24, between 25-49, between 50-99, between100-199, more than 200 " .
 
 issda:yearlyTurnover
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Organization ;
   rdfs:range xsd:string;
-rdfs:comment "Expresses the yearly turnover of the organization in Euros using the predefined string values: less58000, between59000-100000, between101000-250000, between251000-500000, between501000-750000, between751000-1M, between1M-1.5M, between1.6M-2M, between3M-5M, between6M-10M, between11M-20M, more20M " .
+rdfs:comment "Expresses the yearly turnover of the organization in Euros using the predefined string values: less than 58000, between 59000-100000, between 101000-250000, between 251000-500000, between 501000-750000, between 751000-1M, between 1M-1.5M, between 1.6M-2M, between 3M-5M, between 6M-10M, between 11M-20M, more than 20M " .
 
 # Properties of domain Building or its subclasses
 
@@ -218,25 +218,25 @@ issda:buildingAge
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Building ;
   rdfs:range xsd:integer;
-rdfs:comment "Expresses the exact age of building in years using the integer values".
+rdfs:comment "Expresses the exact age of building in years using integer values such as 5, 10 and 25".
 
 issda:buildingAgeRange 
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Building ;
   rdfs:range xsd:string;
-rdfs:comment "Expresses the age of a building using predefined string values: New, Between new and old, and Old".
+rdfs:comment "Expresses the age of a building using predefined string values: New (less than 5years), Between new and old (between 5-20years), Old (more than 25years)".
 
 issda:surfaceArea
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:Building;
   rdfs:range xsd:integer ;
-rdfs:comment "Expresses the surface of a building in square meters " .
+rdfs:comment "Expresses the surface of a building in square meters using integer values such as 500, 750 and 1000".
 
 issda:numberOfBedrooms
   rdf:type owl:DatatypeProperty ;
   rdfs:domain issda:ResidentialBuilding ;
   rdfs:range xsd:integer ;
-rdfs:comment "Expresses the number of bedrooms of a residential building" .
+rdfs:comment "Expresses the number of bedrooms of a residential building using integer values such as 1, 2, 3 and 4."
 
 issda:heatingEnergySource 
   rdf:type owl:DatatypeProperty ;
@@ -360,4 +360,3 @@ issda:electricOfficeEquipment
 
 issda:electricManufacturingEquipment
   rdfs:subPropertyOf issda:electricEquipment .
-
